@@ -1,4 +1,5 @@
 package com.joeyabouharb.reviewblog.data.entity;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,7 +16,7 @@ public class Category {
 	@GeneratedValue(strategy= GenerationType.AUTO)
 	private long id;
 	@Column(name="category_name")
-	private String name;
+  private String name;
 
   /**
    * @return the id
@@ -44,5 +45,7 @@ public class Category {
   public void setName(String name) {
     this.name = name;
   }
-	
+  
+  
+
 }

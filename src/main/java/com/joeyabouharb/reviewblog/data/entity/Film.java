@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -15,7 +14,7 @@ public class Film {
   @Id
   @Column(name="Film_ID")
   @GeneratedValue(strategy= GenerationType.AUTO)
-  private int Id;
+  private long Id;
 
   @Column(name="Title")
   private String title;
@@ -26,23 +25,23 @@ public class Film {
   @Column(name="Details")
   private String details;
 
-  @ManyToOne
-  private Category category;
+  @Column(name="Column_ID")
+  private long categoryId;
 
-  @ManyToOne
-  private Review review;
+  @Column(name="Review_ID")
+  private long reviewId;
 
   /**
    * @return the id
    */
-  public int getId() {
+  public long getId() {
     return Id;
   }
 
   /**
    * @param id the id to set
    */
-  public void setId(int id) {
+  public void setId(long id) {
     Id = id;
   }
 
@@ -89,31 +88,32 @@ public class Film {
   }
 
   /**
-   * @return the category
+   * @return the categoryId
    */
-  public Category getCategory() {
-    return category;
+  public long getCategoryId() {
+    return categoryId;
   }
 
   /**
-   * @param category the category to set
+   * @param categoryId the categoryId to set
    */
-  public void setCategory(Category category) {
-    this.category = category;
+  public void setCategoryId(long categoryId) {
+    this.categoryId = categoryId;
   }
 
   /**
-   * @return the review
+   * @return the reviewId
    */
-  public Review getReview() {
-    return review;
+  public long getReviewId() {
+    return reviewId;
   }
 
   /**
-   * @param review the review to set
+   * @param reviewId the reviewId to set
    */
-  public void setReview(Review review) {
-    this.review = review;
+  public void setReviewId(long reviewId) {
+    this.reviewId = reviewId;
   }
+
 
 }

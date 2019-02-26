@@ -4,7 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -17,15 +16,18 @@ public class Comment {
 	@Column(name="User_Comment")
 	private String userComment;
 
-  @ManyToOne
-  private Review review;
+  @Column(name="Review_ID")
+  private long reviewId;
 
-  public Review getReview() {
-    return review;
+  @Column(name="User_ID")
+  private long userId;
+  
+  public long getReviewId() {
+    return reviewId;
   }
 
-  public void setReview(Review review) {
-    this.review = review;
+  public void setReview(long reviewId) {
+    this.reviewId = reviewId;
   }
 
   /**
@@ -54,5 +56,26 @@ public class Comment {
    */
   public void setUserComment(String userComment) {
     this.userComment = userComment;
+  }
+
+  /**
+   * @param reviewId the reviewId to set
+   */
+  public void setReviewId(long reviewId) {
+    this.reviewId = reviewId;
+  }
+
+  /**
+   * @return the userId
+   */
+  public long getUserId() {
+    return userId;
+  }
+
+  /**
+   * @param userId the userId to set
+   */
+  public void setUserId(long userId) {
+    this.userId = userId;
   }
 }
