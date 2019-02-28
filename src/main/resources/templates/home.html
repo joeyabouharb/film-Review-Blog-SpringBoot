@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layouts/layout}">
+    <head>
+        <title>Home Page</title>
+       
+    </head>
+    <body>
+
+                <div class="text-center" layout:fragment="content">
+                   <div class="jumbotron p-3 p-md-5 rounded text-light bg-dark">
+                   <div class="col-md-6 px-0">
+                    <h3 class="display-4 font-italic">Welcome To Joey's Review Blog! </h3>
+                    <p class="lead my-3">Feel Free To Read my review on the most recent blockbusters
+                     and discuss your opinions</p>
+                     <p class="lead mb-0">
+                      <a href="#" class="text-white font-weight-bold">Read my most recent review...</a>
+                     </p>
+                    </div>
+                   </div>
+                   <div class="row">
+
+                      <div class="col">
+                      <div th:each="review: ${reviews}" class="d-flex flex-column">
+                      <div>
+                        <p th:text="${review.article}">fdfsdf</p>
+                      </div>
+                      </div>
+                      </div>
+                      <div class="col-md-auto">
+                            <th:block layout:insert="~{fragments/sidenav}"/>
+                      </div>
+                   </div>
+                </div>
+
+    </body>
+</html>

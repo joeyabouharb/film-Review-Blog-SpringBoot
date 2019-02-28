@@ -1,35 +1,49 @@
 package com.joeyabouharb.reviewblog.data.entity;
 
+import java.sql.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name="film_tbl")
 public class Film {
 
   @Id
-  @Column(name="Film_ID")
+  @Column(name="Id")
   @GeneratedValue(strategy= GenerationType.AUTO)
   private long Id;
 
-  @Column(name="Title")
+  @Column(name="title")
   private String title;
 
-  @Column(name="Director")
+  @Column(name="director")
   private String director;
 
-  @Column(name="Details")
+  @Column(name="details")
   private String details;
 
-  @Column(name="Column_ID")
-  private long categoryId;
+  @Column(name="release_date")
+  private Date release_date;
 
-  @Column(name="Review_ID")
-  private long reviewId;
+  @ManyToOne(fetch = FetchType.LAZY, optional = false)
+  @JoinColumn(nullable = false)
+  @OnDelete(action = OnDeleteAction.CASCADE)
+  @JsonIgnore
+  private Category category;
+
 
   /**
    * @return the id
@@ -87,32 +101,33 @@ public class Film {
     this.details = details;
   }
 
+
   /**
-   * @return the categoryId
+   * @return the release_date
    */
-  public long getCategoryId() {
-    return categoryId;
+  public Date getRelease_date() {
+    return release_date;
   }
 
   /**
-   * @param categoryId the categoryId to set
+   * @param release_date the release_date to set
    */
-  public void setCategoryId(long categoryId) {
-    this.categoryId = categoryId;
+  public void setRelease_date(Date release_date) {
+    this.release_date = release_date;
   }
 
   /**
-   * @return the reviewId
+   * @return the category
    */
-  public long getReviewId() {
-    return reviewId;
+  public Category getCategory() {
+    return category;
   }
 
   /**
-   * @param reviewId the reviewId to set
+   * @param category the category to set
    */
-  public void setReviewId(long reviewId) {
-    this.reviewId = reviewId;
+  public void setCategory(Category category) {
+    this.category = category;
   }
 
 

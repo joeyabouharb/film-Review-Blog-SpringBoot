@@ -1,10 +1,16 @@
 package com.joeyabouharb.reviewblog.data.entity;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -12,13 +18,25 @@ import javax.persistence.Table;
 
 public class Role {
   @Id
-  @Column(name="Role_ID")
+  @Column(name="Id")
   @GeneratedValue(strategy= GenerationType.AUTO)
   private long Id;
 
-  @Column(name="Role_Name")
+  @Column(name="role_name")
   private String name;
 
+  @OneToMany(cascade = CascadeType.ALL,
+  fetch = FetchType.LAZY,
+  mappedBy = "role")
+  private Set<User> users;
+
+  public Role(){
+
+  }
+
+  public Role(User... user){
+    this.users.forEach(x-> x.setRole(this));
+  }
   /**
    * @return the id
    */

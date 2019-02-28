@@ -24,7 +24,8 @@ create table review_tbl
 Review_ID int not null auto_increment primary key,
 Author varchar(50) not null,
 article text not null,
-rating int not null
+rating int not null,
+review_date date not null
 );
 
 create table film_tbl
@@ -33,6 +34,7 @@ Film_ID int not null auto_increment primary key,
 Film_Name varchar(50) not null,
 Director varchar(50) not null,
 Details text not null,
+release_date date not null,
 Category_ID int not null,
 Review_ID int null
 );

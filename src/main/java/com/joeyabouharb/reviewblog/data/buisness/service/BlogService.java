@@ -30,33 +30,8 @@ public BlogService(FilmRepository filmRepository,
   this.categoryRepository = categoryRepository;
 }
 public List<FilmReview> GetAllFilmReviews(){
-  Iterable<Film> films = this.filmRepository.findAll();
-  Map<Long, FilmReview> filmReviews = new HashMap<>();
-  films.forEach(film->{
-    FilmReview filmReview = new FilmReview();
-    filmReview.setFilm_ID(film.getId());
-    filmReview.setDirector(film.getDirector());
-    filmReview.setDetails(film.getDetails());
-    filmReview.setTitle(film.getTitle());
-    filmReview.setReview_ID(film.getReviewId());
-    filmReview.setCategory_ID(film.getCategoryId());
-
-    Review review = this.reviewRepository.findById(film.getReviewId()).get();
-    filmReview.setArticle(review.getArticle());
-    filmReview.setAuthor(review.getAuthor());
-    filmReview.setRating(review.getRating());
-
-    Category category = this.categoryRepository.findById(film.getCategoryId()).get();
-    filmReview.setName(category.getName());
-
-
-    filmReviews.put(film.getId(), filmReview);
-  });
-  List<FilmReview> filmReviewList = new ArrayList<>();
-  for(Long filmId:filmReviews.keySet()){
-    filmReviewList.add(filmReviews.get(filmId));
-  }
-  return filmReviewList;
+ 
+  return null;
 }
 
 }

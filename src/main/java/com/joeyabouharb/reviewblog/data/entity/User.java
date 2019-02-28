@@ -2,31 +2,44 @@ package com.joeyabouharb.reviewblog.data.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name="user_tbl")
 public class User {
   @Id
-  @Column(name="User_ID")
+  @Column(name="Id")
   @GeneratedValue(strategy= GenerationType.AUTO)
   private long Id;
 
-  @Column(name="User_Name")
+  @Column(name="user_name")
   private String username;
 
-  @Column(name="Password_Hash")
+  @Column(name="password_hash")
   private String password;
 
-  @Column(name="Email")
+  @Column(name="email")
   private String email;
 
-  @Column(name="Role_ID")
-  private int roleID;
-
+  @ManyToOne(fetch = FetchType.LAZY, optional = false)
+  @JoinColumn(nullable = false)
+  @OnDelete(action = OnDeleteAction.CASCADE)
+  @JsonIgnore
+  private Role role;
+ 
 
   /**
    * @return the id
@@ -85,17 +98,17 @@ public class User {
   }
 
   /**
-   * @return the roleID
+   * @return the role
    */
-  public int getRoleID() {
-    return roleID;
+  public Role getRole() {
+    return role;
   }
 
   /**
-   * @param roleID the roleID to set
+   * @param role the role to set
    */
-  public void setRoleID(int roleID) {
-    this.roleID = roleID;
+  public void setRole(Role role) {
+    this.role = role;
   }
   
 }

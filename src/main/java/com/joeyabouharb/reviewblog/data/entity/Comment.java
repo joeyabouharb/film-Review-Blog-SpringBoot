@@ -5,30 +5,31 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.FetchType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name="comment_tbl")
 public class Comment {
 	@Id
-	@Column(name="Comment_ID")
+	@Column(name="Id")
 	@GeneratedValue(strategy= GenerationType.AUTO)
 	private long id;
-	@Column(name="User_Comment")
-	private String userComment;
-
-  @Column(name="Review_ID")
-  private long reviewId;
-
-  @Column(name="User_ID")
-  private long userId;
+  @Column(name="user_comment")
   
-  public long getReviewId() {
-    return reviewId;
-  }
-
-  public void setReview(long reviewId) {
-    this.reviewId = reviewId;
-  }
+  private String userComment;
+  
+  @ManyToOne(fetch = FetchType.LAZY, optional = false)
+  @JoinColumn(nullable = false)
+  @OnDelete(action = OnDeleteAction.CASCADE)
+  @JsonIgnore
+  private Review review;
+  
+ 
 
   /**
    * @return the id
@@ -59,23 +60,17 @@ public class Comment {
   }
 
   /**
-   * @param reviewId the reviewId to set
+   * @return the review
    */
-  public void setReviewId(long reviewId) {
-    this.reviewId = reviewId;
+  public Review getReview() {
+    return review;
   }
 
   /**
-   * @return the userId
+   * @param review the review to set
    */
-  public long getUserId() {
-    return userId;
+  public void setReview(Review review) {
+    this.review = review;
   }
 
-  /**
-   * @param userId the userId to set
-   */
-  public void setUserId(long userId) {
-    this.userId = userId;
-  }
 }

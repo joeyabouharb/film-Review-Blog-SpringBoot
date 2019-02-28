@@ -10,4 +10,5 @@ public class ReviewBlogApplication {
 		SpringApplication.run(ReviewBlogApplication.class, args);
 	}
 
+  
 }
