@@ -1,17 +1,17 @@
 package com.joeyabouharb.reviewblog.data.buisness.domain;
 
+import java.sql.Date;
+
 public class FilmReview {
 
   private long Review_ID;
-  private long Film_ID;
-  private long Category_ID;
   private String title;
   private String director;
   private String details;
   private String author;
-  private String article;
   private int rating;
   private String name;
+  private Date review_date;
 
   /**
    * @return the review_ID
@@ -27,33 +27,7 @@ public class FilmReview {
     Review_ID = review_ID;
   }
 
-  /**
-   * @return the film_ID
-   */
-  public long getFilm_ID() {
-    return Film_ID;
-  }
-
-  /**
-   * @param film_ID the film_ID to set
-   */
-  public void setFilm_ID(long film_ID) {
-    Film_ID = film_ID;
-  }
-
-  /**
-   * @return the category_ID
-   */
-  public long getCategory_ID() {
-    return Category_ID;
-  }
-
-  /**
-   * @param category_ID the category_ID to set
-   */
-  public void setCategory_ID(long category_ID) {
-    Category_ID = category_ID;
-  }
+ 
 
   /**
    * @return the title
@@ -111,20 +85,7 @@ public class FilmReview {
     this.author = author;
   }
 
-  /**
-   * @return the article
-   */
-  public String getArticle() {
-    return article;
-  }
-
-  /**
-   * @param article the article to set
-   */
-  public void setArticle(String article) {
-    this.article = article;
-  }
-
+  
   /**
    * @return the rating
    */
@@ -152,4 +113,19 @@ public class FilmReview {
   public void setName(String name) {
     this.name = name;
   }
+
+  /**
+   * @return the review_date
+   */
+  public Date getReview_date() {
+    return review_date;
+  }
+
+  /**
+   * @param review_date the review_date to set
+   */
+  public void setReview_date(Date review_date) {
+    this.review_date = review_date;
+  }
+
 }

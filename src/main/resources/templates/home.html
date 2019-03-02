@@ -20,13 +20,26 @@
                    <div class="row">
 
                       <div class="col">
-                      <div th:each="review: ${reviews}" class="d-flex flex-column">
-                      <div>
-                        <p th:text="${review.article}">fdfsdf</p>
+                    <span th:if="${filmReviews == null}">nothing Found</span>
+                      <div th:each="filmReview: ${filmReviews}" class="d-flex flex-column">
+                      <div class="rounded shadow border p-2">
+                        <div class="row">
+                        <a class="col" th:href="@{/review/{id}(id=${filmReview.Review_ID})}">
+                        <h2 th:text="${filmReview.title}"></h2>
+                        </a>
+                        <span class="col-sm-auto" th:text="${filmReview.review_date}"></span>
+                        </div>
+                        <div class="row m-3">
+                        <p th:text="${filmReview.details}"></p>
+                        </div>
+                        <div class="row">
+                        <span class="col"></span>
+                        <span class="col-auto" th:text="${filmReview.rating}"></span>
+                        </div>
                       </div>
                       </div>
                       </div>
-                      <div class="col-md-auto">
+                      <div class="col-md-auto m-2">
                             <th:block layout:insert="~{fragments/sidenav}"/>
                       </div>
                    </div>

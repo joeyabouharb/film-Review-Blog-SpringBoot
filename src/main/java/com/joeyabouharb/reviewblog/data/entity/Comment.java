@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -24,12 +25,16 @@ public class Comment {
   private String userComment;
   
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
-  @JoinColumn(nullable = false)
+  @JoinColumn(nullable = true)
   @OnDelete(action = OnDeleteAction.CASCADE)
   @JsonIgnore
   private Review review;
   
- 
+  @ManyToOne(fetch= FetchType.LAZY)
+  @JoinColumn(nullable = true)
+  @OnDelete(action = OnDeleteAction.CASCADE)
+  @JsonIgnore
+  private User user;
 
   /**
    * @return the id
@@ -71,6 +76,20 @@ public class Comment {
    */
   public void setReview(Review review) {
     this.review = review;
+  }
+
+  /**
+   * @return the user
+   */
+  public User getUser() {
+    return user;
+  }
+
+  /**
+   * @param user the user to set
+   */
+  public void setUser(User user) {
+    this.user = user;
   }
 
 }

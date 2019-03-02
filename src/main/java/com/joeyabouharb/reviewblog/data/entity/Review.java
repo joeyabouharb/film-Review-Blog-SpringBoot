@@ -1,7 +1,7 @@
 package com.joeyabouharb.reviewblog.data.entity;
 
 import java.sql.Date;
-import java.util.HashSet;
+
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -11,8 +11,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 @Table(name="review_tbl")
@@ -21,7 +25,7 @@ public class Review {
   @Id
   @Column(name="Id")
   @GeneratedValue(strategy= GenerationType.AUTO)
-  private int Id;
+  private long Id;
 
   @Column(name="author")
   private String author;
@@ -34,6 +38,10 @@ public class Review {
 
   @Column(name="review_date")
   private Date review_date;
+  
+  @OneToOne()
+  @JsonIgnore()
+  private Film film;
 
   @OneToMany(cascade = CascadeType.ALL,
   fetch = FetchType.LAZY,
@@ -47,17 +55,18 @@ public class Review {
   public Review(){
 
   }
+  
   /**
    * @return the id
    */
-  public int getId() {
+  public long getId() {
     return Id;
   }
 
   /**
    * @param id the id to set
    */
-  public void setId(int id) {
+  public void setId(long id) {
     Id = id;
   }
 
@@ -129,6 +138,20 @@ public class Review {
    */
   public void setComments(Set<Comment> comments) {
     this.comments = comments;
+  }
+
+  /**
+   * @return the film
+   */
+  public Film getFilm() {
+    return film;
+  }
+
+  /**
+   * @param film the film to set
+   */
+  public void setFilm(Film film) {
+    this.film = film;
   }
   
 }

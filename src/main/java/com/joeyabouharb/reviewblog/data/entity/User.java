@@ -1,5 +1,8 @@
 package com.joeyabouharb.reviewblog.data.entity;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
@@ -14,6 +17,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -40,6 +45,18 @@ public class User {
   @JsonIgnore
   private Role role;
  
+  @OneToMany(cascade = CascadeType.ALL,
+  fetch = FetchType.LAZY,
+  mappedBy = "user")
+  private Set<Comment> comments;
+
+  public User(){
+
+  }
+
+  public User(Comment... comment){
+    this.comments.forEach(x-> x.setUser(this));
+  }
 
   /**
    * @return the id
@@ -110,5 +127,7 @@ public class User {
   public void setRole(Role role) {
     this.role = role;
   }
+
+
   
 }

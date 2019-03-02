@@ -18,20 +18,34 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class BlogService {
-private final FilmRepository filmRepository;
+
 private final ReviewRepository reviewRepository;
-private final CategoryRepository categoryRepository;
 @Autowired
-public BlogService(FilmRepository filmRepository, 
-                   ReviewRepository reviewRepository,
-                   CategoryRepository categoryRepository) {
-  this.filmRepository = filmRepository;
+public BlogService(ReviewRepository reviewRepository) {
   this.reviewRepository = reviewRepository;
-  this.categoryRepository = categoryRepository;
 }
-public List<FilmReview> GetAllFilmReviews(){
- 
-  return null;
+
+public List<FilmReview> getFilmReviewsOrderedByDate(){
+ Iterable<Review> reviews = this.reviewRepository.orderReviewsByLatest();
+  Map<Long, FilmReview> filmReviewMap = new HashMap<>();
+
+  reviews.forEach(review -> {
+    FilmReview filmReview = new FilmReview();
+    filmReview.setRating(review.getRating());
+    filmReview.setAuthor(review.getAuthor());
+    filmReview.setReview_date(review.getReview_date());
+    filmReview.setReview_ID(review.getId());
+    filmReview.setTitle(review.getFilm().getTitle());
+    filmReview.setDetails(review.getFilm().getDetails());
+    filmReview.setDirector(review.getFilm().getDirector());
+    filmReviewMap.put(review.getId(), filmReview);
+  });
+  List<FilmReview> filmReviews = new ArrayList<>();
+  for(Long Id:filmReviewMap.keySet()){
+    filmReviews.add(filmReviewMap.get(Id));
+  }
+
+  return filmReviews;
 }
 
 }
