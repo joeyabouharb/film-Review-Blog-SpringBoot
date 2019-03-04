@@ -30,8 +30,8 @@ public class Review {
   @Column(name="author")
   private String author;
 
-  @Column(name="article")
-  private String article;
+  @Column(name="article", columnDefinition = "blob")
+  private String[] article;
 
   @Column(name="rating")
   private int rating;
@@ -87,14 +87,14 @@ public class Review {
   /**
    * @return the article
    */
-  public String getArticle() {
+  public String[] getArticle() {
     return article;
   }
 
   /**
    * @param article the article to set
    */
-  public void setArticle(String article) {
+  public void setArticle(String[] article) {
     this.article = article;
   }
 

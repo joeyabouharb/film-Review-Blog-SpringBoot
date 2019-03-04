@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layouts/layout}">
+<head>
+<title>Article Page</title>
+</head>
+
+<body>
+<main class="container border rounded shadow" layout:fragment="content">
+<div class="row m-3">
+<h1 class="col text-center" th:text="${article.title}"></h1>
+<div class="col-auto">
+<span>Date Posted</span>
+<span th:text="${article.review_date}">
+</span>
+</div>
+</div>
+<div class="row bg-dark text-white m-2 justify-content-center">
+<div class="col">
+<p class="row"> Synopsis: </p>
+<p class="row font-italic font-weight-light" th:text="${article.details}"></p>
+</div>
+</div>
+<div class="row m-2 p-2" th:each="paragraph: ${article.article}">
+<p th:text="${paragraph}"></p>
+</div>
+<div class="row m-2">
+<div class="col-auto"><span>Rating: </span><span th:text="${article.rating}"></span></div>
+<div class="col"></div>
+<div class="col-auto"><span>Release Date: </span><span th:text="${article.release_date}"></span></div>
+</div>
+</main>
+</body>
+</html>
